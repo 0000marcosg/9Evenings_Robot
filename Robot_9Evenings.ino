@@ -1,6 +1,6 @@
 //Robot_9Evenings
 
-#include <AFMotor.h>
+#include <AFMotor.h> //Libreria para control de motores
 int paso;
 int direccion;
 
@@ -9,7 +9,7 @@ int trig2 = 17;
 int echo1 = 15;
 int echo2 = 16;
 
-int seguridad_a;
+int seguridad_a; 
 int seguridad_at;
 
 AF_DCMotor motor_a_i(3);
@@ -39,8 +39,8 @@ void setup() {
 }
 
 void loop() {
-  paso = random(-1, 2);
-  direccion = random(-1, 2);
+  paso = random(-1, 2); //Esta variable da la direccion del moviemiento: atras, adelante o detenido
+  direccion = random(-1, 2); //Esta variable decide si se movera en linea recta o dara un giro
 
   int dist_adelante = dist_sensor1();
   int dist_atras = dist_sensor2();
@@ -156,7 +156,7 @@ void atras_d() {
   Serial.println("atras_d");
   delay(500);
 }
-
+//Sensor de ultrasonido 1
 int dist_sensor1() {
   digitalWrite(trig1, LOW);
   delayMicroseconds(5);
@@ -165,8 +165,9 @@ int dist_sensor1() {
   int tiempo = pulseIn(echo1, HIGH);
   int distancia = int(0.017 * tiempo);
   //Serial.println(distancia);
-
-  if (distancia < 0) {
+  
+  //Controla errores de lectura en el sensor
+  if (distancia < 0) { 
     distancia = 20;
   }
 
@@ -176,6 +177,7 @@ int dist_sensor1() {
   return distancia;
 }
 
+//Sensor de ultrasonido 2
 int dist_sensor2() {
   digitalWrite(trig2, LOW);
   delayMicroseconds(5);
@@ -185,6 +187,7 @@ int dist_sensor2() {
   int distancia = int(0.017 * tiempo);
   //Serial.println(distancia);
 
+  //Controla errores de lectura en el sensor
   if (distancia < 0) {
     distancia = 0;
   }
